@@ -3,227 +3,185 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Podwój swój Bitcoin</title>
+<title>Podwój swój Bitcoin - Double Your Bitcoin</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
   body {
-    background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
-    color: #eee;
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 20px;
-    user-select: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0d1117, #161b22);
+    color: #c9d1d9;
+    margin: 0; padding: 20px;
+    display: flex; flex-direction: column; align-items: center;
   }
   h1 {
-    text-align: center;
-    font-weight: 700;
-    font-size: 2.8rem;
-    margin-bottom: 5px;
-    color: #ffcc00;
-    text-shadow: 0 0 10px #ffcc00;
+    color: #58a6ff;
+    margin-bottom: 0.3em;
   }
-  #user-stats {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 1.2rem;
-    color: #ccc;
-    letter-spacing: 1px;
+  #main-container {
+    background: #161b22;
+    border-radius: 10px;
+    padding: 20px 30px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 0 15px #2383ff88;
   }
-  #container {
-    max-width: 400px;
-    background: #222;
-    margin: 0 auto;
-    padding: 30px 25px 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px #ffcc00aa;
-  }
-  #address-label {
-    font-size: 1rem;
+  label {
+    display: block;
+    margin: 12px 0 6px;
     font-weight: 600;
-    margin-bottom: 6px;
-    color: #ffcc00;
+  }
+  input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+  }
+  button {
+    margin-top: 15px;
+    background-color: #2383ff;
+    color: white;
+    border: none;
+    padding: 14px 0;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #1a6de0;
   }
   #btc-address {
-    font-family: monospace;
-    background: #111;
-    padding: 12px 15px;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    word-break: break-all;
-    user-select: all;
-    cursor: pointer;
-    box-shadow: 0 0 10px #ffcc00aa inset;
-    transition: background 0.3s;
-  }
-  #btc-address:hover {
-    background: #222;
-  }
-  #copy-btn {
-    display: block;
-    width: 100%;
-    margin-top: 15px;
-    background: #ffcc00;
-    border: none;
-    color: #222;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 12px;
+    margin-top: 25px;
+    padding: 15px;
+    background: #0d1117;
     border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 10px #ffcc00;
-    transition: background 0.3s;
-    user-select: none;
-  }
-  #copy-btn:hover {
-    background: #e6b800;
-  }
-  #confirmation {
-    margin-top: 12px;
-    color: #0f0;
-    font-weight: 600;
+    font-family: monospace;
+    font-size: 18px;
+    user-select: all;
     text-align: center;
-    min-height: 22px;
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+    color: #58a6ff;
+    cursor: pointer;
   }
-  #confirmation.visible {
-    opacity: 1;
+  #copy-msg {
+    margin-top: 6px;
+    color: #2ea043;
+    font-weight: 600;
+    height: 20px;
   }
   #description {
-    margin-top: 18px;
-    font-size: 0.9rem;
-    color: #ddd;
+    margin-top: 20px;
+    font-size: 14px;
     line-height: 1.4;
-    text-align: center;
-    padding: 0 10px;
-    user-select: none;
+    color: #8b949e;
   }
   #payouts {
     margin-top: 30px;
-    background: #111;
-    border-radius: 8px;
-    padding: 15px 20px;
+    background: #0d1117;
     max-height: 250px;
     overflow-y: auto;
+    border-radius: 10px;
+    padding: 12px 15px;
     font-family: monospace;
-    font-size: 0.9rem;
-    color: #a0ffa0;
-    box-shadow: 0 0 15px #00ff00aa inset;
-    user-select: none;
+    font-size: 14px;
+    color: #39d353;
+    box-shadow: inset 0 0 10px #39d353aa;
   }
   .payout-line {
-    margin: 5px 0;
+    margin-bottom: 6px;
   }
   .address-short {
+    color: #58a6ff;
     font-weight: 700;
-    color: #ffcc00;
   }
 </style>
 </head>
 <body>
 
-<h1>Podwój swój Bitcoin!</h1>
-
-<div id="user-stats">
-  Online teraz: <span id="online-users">...</span> użytkowników &nbsp;|&nbsp; Aktywnie korzystających: <span id="active-users">...</span>
-</div>
-
-<div id="container">
-  <div id="address-label">Wyślij swoje BTC na poniższy adres:</div>
-  <div id="btc-address" title="Kliknij, aby skopiować adres">1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh</div>
-  <button id="copy-btn">Kopiuj adres</button>
-  <div id="confirmation"></div>
+<div id="main-container">
+  <h1>Podwój swój Bitcoin!</h1>
   <div id="description">
-    Wyślij swoje BTC na powyższy adres, aby otrzymać podwójną kwotę z powrotem. <br>
-    Wiele tysięcy użytkowników zaufało tej metodzie i już cieszy się z szybkich, darmowych zysków. <br>
-    Nie przegap tej unikalnej okazji – czas działać TERAZ!
+    Wyślij swoje BTC na poniższy adres, aby otrzymać podwójną kwotę z powrotem.<br />
+    Nasza platforma automatycznie zweryfikuje Twoją wpłatę i natychmiast przekaże Ci podwójną ilość Bitcoinów.<br />
+    Wiele tysięcy użytkowników już skorzystało i otrzymało swoje zwroty. Dołącz do nich!
+  </div>
+  <div id="btc-address" title="Kliknij, aby skopiować adres BTC">
+    1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh
+  </div>
+  <div id="copy-msg"></div>
+  <button id="copy-btn">Kopiuj adres</button>
+
+  <div id="payouts" aria-live="polite" aria-atomic="false" aria-relevant="additions">
+    <!-- Tutaj będą wyświetlane wypłaty -->
   </div>
 </div>
 
-<div id="payouts" aria-live="polite" aria-relevant="additions" aria-atomic="false">
-  <!-- Tu będą wypłaty -->
-</div>
-
-<audio id="notification-sound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
+<audio id="notificationSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
 
 <script>
-  // Dynamiczne liczby użytkowników
-  function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  const onlineUsersEl = document.getElementById('online-users');
-  const activeUsersEl = document.getElementById('active-users');
-
-  function updateUserStats() {
-    onlineUsersEl.textContent = randomInt(1520, 3250);
-    activeUsersEl.textContent = randomInt(280, 610);
-  }
-  updateUserStats();
-  setInterval(updateUserStats, 5000);
-
-  // Kopiowanie adresu BTC
-  const btcAddress = document.getElementById('btc-address');
+  const btcAddress = '1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh';
+  const btcAddressEl = document.getElementById('btc-address');
   const copyBtn = document.getElementById('copy-btn');
-  const confirmation = document.getElementById('confirmation');
-
-  function copyAddress() {
-    navigator.clipboard.writeText(btcAddress.textContent).then(() => {
-      confirmation.textContent = 'Adres skopiowany do schowka!';
-      confirmation.classList.add('visible');
-      setTimeout(() => confirmation.classList.remove('visible'), 2500);
-    }).catch(() => {
-      confirmation.textContent = 'Błąd podczas kopiowania!';
-      confirmation.classList.add('visible');
-      setTimeout(() => confirmation.classList.remove('visible'), 2500);
-    });
-  }
-
-  copyBtn.addEventListener('click', copyAddress);
-  btcAddress.addEventListener('click', copyAddress);
-
-  // Animacja wypłat
+  const copyMsg = document.getElementById('copy-msg');
   const payoutsEl = document.getElementById('payouts');
-  const notificationSound = document.getElementById('notification-sound');
+  const notificationSound = document.getElementById('notificationSound');
 
-  const sampleNames = ["Anna", "Piotr", "Kasia", "Marek", "Basia", "Tomek", "Ewa", "Łukasz", "Magda", "Paweł", "Ola", "Bartek", "Zosia", "Kuba"];
-  const btcAddressBase = "1B3gKo";
-  const btcAddressTail = "uS1a9b";
-  const payoutsHistory = [];
+  btcAddressEl.textContent = btcAddress;
 
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(btcAddress)
+      .then(() => {
+        copyMsg.textContent = 'Adres skopiowany do schowka!';
+        setTimeout(() => { copyMsg.textContent = ''; }, 2500);
+      })
+      .catch(() => {
+        copyMsg.textContent = 'Błąd podczas kopiowania.';
+      });
+  });
+
+  // Generowanie losowej liczby BTC od 0.001 do 0.3 z 3 miejscami po przecinku
   function randomBtcAmount() {
-    return (Math.random() * (0.07 - 0.005) + 0.005).toFixed(5);
+    return (Math.random() * 0.299 + 0.001).toFixed(3);
   }
 
-  function randomShortAddress() {
-    // np. 1B3gKo...uS1a9b
-    return btcAddressBase + "..." + btcAddressTail;
+  // Funkcja do generowania losowego adresu BTC
+  function generateRandomBtcAddress() {
+    const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+    const length = Math.floor(Math.random() * (35 - 26 + 1)) + 26;
+    let address = '';
+    address += Math.random() < 0.5 ? '1' : '3';
+    for (let i = 1; i < length; i++) {
+      address += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return address;
   }
 
+  // Dodanie nowej wypłaty do listy
   function newPayoutLine() {
-    let name = sampleNames[randomInt(0, sampleNames.length -1)];
     let amount = randomBtcAmount();
-    let addressShort = randomShortAddress();
+    let addressFull = generateRandomBtcAddress();
+    let addressShort = addressFull.slice(0, 5) + '...' + addressFull.slice(-3);
 
     const line = document.createElement('div');
     line.classList.add('payout-line');
-    line.innerHTML = `<strong>${name}</strong> wypłacił(a) <strong>${amount} BTC</strong> na adres <span class="address-short">${addressShort}</span>`;
+    line.innerHTML = `Wypłacono <strong>${amount} BTC</strong> na adres <span class="address-short">${addressShort}</span>`;
     payoutsEl.appendChild(line);
 
-    // Limit do 30 linii
     if (payoutsEl.children.length > 30) {
       payoutsEl.removeChild(payoutsEl.children[0]);
     }
 
-    // Scroll w dół
     payoutsEl.scrollTop = payoutsEl.scrollHeight;
 
-    // Dźwięk powiadomienia
+    // Odtwarzaj dźwięk powiadomienia
     notificationSound.currentTime = 0;
     notificationSound.play();
   }
 
+  // Losowy interwał 1-10 sekund do wywołania nowej wypłaty
   function scheduleNextPayout() {
-    const delay = randomInt(1000, 10000);
+    const delay = Math.floor(Math.random() * 10000) + 1000;
     setTimeout(() => {
       newPayoutLine();
       scheduleNextPayout();
