@@ -30,20 +30,6 @@
     display: flex; justify-content: space-between; align-items: center;
     user-select: all;
   }
-   .logo {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #58a6ff;
-      text-shadow: 0 0 6px #58a6ff66;
-      display: flex;
-      align-items: center;
-    }
-    .logo .lock {
-      margin-left: 6px;
-      font-size: 1.2rem;
-      color: #2ea043;
-    }
   button.copy-btn {
     background: #3aafa9; border: none; padding: 0.5rem 1rem; color: white;
     font-weight: 700; border-radius: 6px; cursor: pointer;
@@ -72,11 +58,10 @@
 </style>
 </head>
 <body>
-  <audio id="ambientSound" src="https://actions.google.com/sounds/v1/misc/ambiant_background_loop.ogg" loop autoplay></audio>
 
-  <!-- Górny pasek: logo + liczniki -->
-  <header>
-    <div class="logo">DoubleBTC <span class="lock">🔒</span></div>
+<header>
+  <h1>DoubleBTC</h1>
+</header>
 
 <main>
   <div class="desc">
