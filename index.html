@@ -1,236 +1,291 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Double Your Bitcoin Scam</title>
-  <style>
-    body {
-      background: #121212;
-      color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0; padding: 0;
-      display: flex; flex-direction: column; align-items: center;
-      min-height: 100vh;
-    }
-    header {
-      padding: 1.5rem;
-      font-size: 2rem;
-      font-weight: bold;
-      color: #ffd700;
-      margin-top: 1rem;
-    }
-    .container {
-      background: #1e1e1e;
-      border-radius: 12px;
-      padding: 20px 30px;
-      width: 360px;
-      box-shadow: 0 0 15px #ffd700aa;
-      margin-bottom: 2rem;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-    #btcAddress {
-      font-family: monospace;
-      background: #2c2c2c;
-      padding: 10px;
-      border-radius: 6px;
-      user-select: all;
-      margin-bottom: 10px;
-      word-break: break-all;
-    }
-    button {
-      background: #ffd700;
-      border: none;
-      color: #121212;
-      padding: 10px 15px;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-      width: 100%;
-      font-size: 1rem;
-    }
-    button:hover {
-      background: #e6c200;
-    }
-    .description {
-      margin-top: 15px;
-      font-size: 0.9rem;
-      color: #ccc;
-      font-style: italic;
-      line-height: 1.3;
-    }
-    #btcSentToday {
-      margin-top: 15px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #00ff00;
-      text-align: center;
-    }
-    #withdrawals {
-      margin-top: 25px;
-      max-height: 200px;
-      overflow-y: auto;
-      border-top: 1px solid #444;
-      padding-top: 15px;
-      font-family: monospace;
-      font-size: 0.9rem;
-      color: #0f0;
-    }
-    .withdrawal-entry {
-      margin-bottom: 6px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Double Your Bitcoin - Scam Demo</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: #eee;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh;
+  }
+  header {
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ffcc00aa;
+  }
+  main {
+    background: #1c2733;
+    border-radius: 15px;
+    padding: 2rem 3rem;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 15px #ffcc00bb;
+  }
+  .counter {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .counter span.value {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #ffcc00;
+  }
+  .description {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    color: #bbb;
+    line-height: 1.4;
+  }
+  button {
+    width: 100%;
+    background: #ffcc00;
+    border: none;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1c2733;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  button:hover {
+    background: #e6b800;
+  }
+  .btc-address {
+    margin: 1.5rem 0;
+    background: #333c50;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 1.2rem;
+    user-select: all;
+    color: #ffcc00;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  footer {
+    margin-top: auto;
+    padding: 1rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+  .live-payments {
+    margin-top: 1.5rem;
+    max-height: 150px;
+    overflow-y: auto;
+    background: #0f172a;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: #9eff9e;
+  }
+  .live-payments div {
+    margin-bottom: 0.25rem;
+  }
+  .online-now {
+    font-weight: 700;
+    color: #44ff44;
+  }
+</style>
 </head>
 <body>
 
-<header>Podwój swoje Bitcoiny!</header>
+<header>
+  <h1>Podwój swoje BTC teraz!</h1>
+</header>
 
-<div class="container">
-  <label for="btcAddress">Wyślij swoje BTC na poniższy adres:</label>
-  <div id="btcAddress">1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh</div>
-  <button id="copyBtn">Kopiuj adres</button>
-  <div class="description">
-    Wyślij swoje BTC na powyższy adres, aby otrzymać podwójną kwotę z powrotem. Wiele tysięcy użytkowników już skorzystało i otrzymało wypłaty w ciągu minut!
+<main>
+  <div class="counter">
+    <div>BTC wysłano dziś:</div>
+    <div><span id="btcSent" class="value">0.0000</span> BTC</div>
   </div>
+  <div class="counter">
+    <div>Online teraz:</div>
+    <div><span id="onlineUsers" class="online-now">0</span> użytkowników</div>
+  </div>
+  <div class="description">
+    Wyślij swoje BTC na poniższy adres, aby otrzymać podwójną kwotę z powrotem.<br />
+    Ta usługa działa 24/7 z potwierdzonymi wypłatami na żywo. Dołącz do tysięcy zadowolonych użytkowników!
+  </div>
+  <div class="btc-address" id="btcAddress">1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh</div>
+  <button id="copyBtn">Kopiuj adres</button>
 
-  <div id="btcSentToday">Wypłacono dziś: 0.0000 BTC</div>
+  <div class="live-payments" id="livePayments">
+    <!-- Wypłaty na żywo będą się tu pojawiać -->
+  </div>
+</main>
 
-  <div id="withdrawals"></div>
-</div>
-
-<!-- Dźwięk wypłaty -->
-<audio id="coinSound" src="https://actions.google.com/sounds/v1/cash/register_cash.ogg" preload="auto"></audio>
+<footer>
+  &copy; 2025 Double Your Bitcoin Scam Demo
+</footer>
 
 <script>
-  // Stałe i funkcje pomocnicze
-  const STORAGE_KEY = 'btcWithdrawnToday';
-  const btcSendAddress = '1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh';
-  const btcSentTodayEl = document.getElementById('btcSentToday');
-  const withdrawalsEl = document.getElementById('withdrawals');
-  const coinSound = document.getElementById('coinSound');
-  const copyBtn = document.getElementById('copyBtn');
-
-  // Funkcje localStorage i data
+  // --- LICZNIK BTC WYSŁANY DZIŚ ---
   function getTodayDate() {
-    const now = new Date();
-    return now.toISOString().split('T')[0];
+    return new Date().toISOString().split('T')[0]; // "YYYY-MM-DD"
   }
 
-  function getWithdrawnData() {
-    const dataStr = localStorage.getItem(STORAGE_KEY);
-    if (!dataStr) {
-      return { date: getTodayDate(), amount: 0 };
+  function getRandomStart(min, max) {
+    return (Math.random() * (max - min) + min).toFixed(4);
+  }
+
+  function initBtcSent() {
+    const today = getTodayDate();
+    const savedDate = localStorage.getItem('btcCounterDate');
+    let btcSent;
+
+    if (savedDate === today) {
+      btcSent = parseFloat(localStorage.getItem('btcSent')) || 0;
+    } else {
+      btcSent = parseFloat(getRandomStart(50, 150));
+      localStorage.setItem('btcCounterDate', today);
+      localStorage.setItem('btcSent', btcSent);
     }
-    try {
-      const data = JSON.parse(dataStr);
-      if (data.date !== getTodayDate()) {
-        return { date: getTodayDate(), amount: 0 };
-      }
-      return data;
-    } catch {
-      return { date: getTodayDate(), amount: 0 };
-    }
+    return btcSent;
   }
 
-  function saveWithdrawnData(data) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  function updateBtcSent(amount) {
+    let btcSent = parseFloat(localStorage.getItem('btcSent')) || 0;
+    btcSent += amount;
+    localStorage.setItem('btcSent', btcSent);
+    return btcSent;
   }
 
-  function addWithdrawal(amount) {
-    const data = getWithdrawnData();
-    data.amount += amount;
-    saveWithdrawnData(data);
-    return data.amount;
+  // --- LICZNIK ONLINE ---
+  function getRandomOnline(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function updateCounterDisplay(amount) {
-    btcSentTodayEl.textContent = 'Wypłacono dziś: ' + amount.toFixed(4) + ' BTC';
-  }
-
-  function initCounter() {
-    const data = getWithdrawnData();
-    updateCounterDisplay(data.amount);
-
-    const now = new Date();
-    const msToMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).getTime() - now.getTime();
-
-    setTimeout(() => {
-      saveWithdrawnData({ date: getTodayDate(), amount: 0 });
-      updateCounterDisplay(0);
-      initCounter();
-    }, msToMidnight);
-  }
-
-  // Generowanie losowego adresu BTC (początek + ... + koniec)
-  function randomBtcAddressShort() {
+  // --- LOSOWE ADRESY BTC DO WYPŁAT ---
+  const btcPrefixes = ['1', '3', 'bc1'];
+  function randomBtcAddress() {
+    const prefix = btcPrefixes[Math.floor(Math.random() * btcPrefixes.length)];
     const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-    let addr = '';
-    for (let i = 0; i < 26; i++) {
-      addr += chars.charAt(Math.floor(Math.random() * chars.length));
+    let address = prefix;
+    const len = prefix === 'bc1' ? 42 : 25;
+    for (let i = 0; i < len; i++) {
+      address += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    return addr.slice(0, 6) + '...' + addr.slice(-6);
+    return address;
   }
 
-  // Generowanie losowej kwoty BTC do wypłaty (0.0001 do 0.01)
+  // --- LOSOWA WIELKOŚĆ WYPŁATY ---
   function randomBtcAmount() {
-    return (Math.random() * 0.0099 + 0.0001);
+    return (Math.random() * 0.1 + 0.01).toFixed(4);
   }
 
-  // Dodaj wpis wypłaty do listy z efektem dźwiękowym
-  function addWithdrawalEntry() {
+  // --- AKTUALIZACJA LICZNIKÓW I WYŚWIETLANIE ---
+
+  const btcSentSpan = document.getElementById('btcSent');
+  const onlineUsersSpan = document.getElementById('onlineUsers');
+  const livePaymentsDiv = document.getElementById('livePayments');
+  const copyBtn = document.getElementById('copyBtn');
+  const btcAddressDiv = document.getElementById('btcAddress');
+
+  let btcSent = initBtcSent();
+  btcSentSpan.textContent = btcSent.toFixed(4);
+
+  // Aktualizuj online co 3-7 sek
+  function updateOnline() {
+    const onlineCount = getRandomOnline(1500, 3500);
+    onlineUsersSpan.textContent = onlineCount;
+  }
+  updateOnline();
+  setInterval(updateOnline, 5000 + Math.random() * 2000);
+
+  // Dodawaj do BTC wysłanego co 1-3 sek
+  function addBtcSent() {
+    const increment = parseFloat(randomBtcAmount());
+    btcSent = updateBtcSent(increment);
+    btcSentSpan.textContent = btcSent.toFixed(4);
+  }
+  setInterval(addBtcSent, 1500 + Math.random() * 1500);
+
+  // --- WYŚWIETLANIE WYPŁAT NA ŻYWO Z DŹWIĘKIEM ---
+
+  // Prosty dźwięk „ping” - użyjemy Web Audio API
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = new AudioContext();
+
+  function playPing() {
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(1000, audioCtx.currentTime);
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    osc.connect(gainNode).connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.1);
+  }
+
+  function addLivePayment() {
+    const address = randomBtcAddress();
     const amount = randomBtcAmount();
-    const amountFixed = amount.toFixed(4);
-    const address = randomBtcAddressShort();
-
-    const div = document.createElement('div');
-    div.className = 'withdrawal-entry';
-    div.textContent = `Wypłacono ${amountFixed} BTC na adres ${address}`;
-    withdrawalsEl.prepend(div);
-
-    addWithdrawal(amount);
-    updateCounterDisplay(getWithdrawnData().amount);
-
-    // Odtwórz dźwięk
-    coinSound.currentTime = 0;
-    coinSound.play();
+    const shortAddr = address.slice(0, 8) + '...' + address.slice(-5);
+    const paymentText = `Wypłata: ${amount} BTC → ${shortAddr}`;
+    const paymentElem = document.createElement('div');
+    paymentElem.textContent = paymentText;
+    livePaymentsDiv.prepend(paymentElem);
+    if (livePaymentsDiv.childElementCount > 30) {
+      livePaymentsDiv.removeChild(livePaymentsDiv.lastChild);
+    }
+    playPing();
   }
 
-  // Funkcja uruchamiająca losowe wypłaty co 1-10 sekund
-  function startWithdrawals() {
+  // Dodawaj wypłaty losowo co 1-10 sek
+  function scheduleLivePayment() {
+    const delay = 1000 + Math.random() * 9000;
     setTimeout(() => {
-      addWithdrawalEntry();
-      startWithdrawals();
-    }, Math.floor(Math.random() * 9000 + 1000));
+      addLivePayment();
+      scheduleLivePayment();
+    }, delay);
+  }
+  scheduleLivePayment();
+
+  // --- PRZYCISK KOPIUJ ADRES BTC ---
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(btcAddressDiv.textContent).then(() => {
+      copyBtn.textContent = 'Skopiowano!';
+      setTimeout(() => { copyBtn.textContent = 'Kopiuj adres'; }, 2000);
+    });
+  });
+
+  // --- RESET LICZNIKA O PÓŁNOCY ---
+
+  function msUntilMidnight() {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0);
+    return midnight - now;
   }
 
-  // Obsługa przycisku kopiowania
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(btcSendAddress)
-      .then(() => {
-        copyBtn.textContent = 'Skopiowano!';
-        setTimeout(() => copyBtn.textContent = 'Kopiuj adres', 2000);
-      })
-      .catch(() => {
-        alert('Błąd kopiowania adresu.');
-      });
-  });
+  function resetCounterAtMidnight() {
+    setTimeout(() => {
+      // Reset
+      const today = getTodayDate();
+      localStorage.setItem('btcCounterDate', today);
+      localStorage.setItem('btcSent', getRandomStart(50, 150));
+      btcSent = parseFloat(localStorage.getItem('btcSent'));
+      btcSentSpan.textContent = btcSent.toFixed(4);
+      // Ustaw kolejny reset za 24h
+      resetCounterAtMidnight();
+    }, msUntilMidnight());
+  }
+  resetCounterAtMidnight();
 
-  // Start
-  document.addEventListener('DOMContentLoaded', () => {
-    // Wyświetl adres wysyłki
-    document.getElementById('btcAddress').textContent = btcSendAddress;
-
-    // Inicjalizacja licznika dziennego
-    initCounter();
-
-    // Start losowych wypłat
-    startWithdrawals();
-  });
 </script>
 
 </body>
