@@ -93,9 +93,8 @@
   const fakeChat = document.getElementById("fakeChat");
   const paymentSound = document.getElementById("paymentSound");
 
-  // Start losowej sumy BTC (między 0.5 a 3.5)
-  let dailyBtcSent = (Math.random() * 3 + 0.5).toFixed(4);
-  btcSentElement.textContent = dailyBtcSent + " BTC";
+  // Start licznika od losowej sumy (0.5 - 3.5)
+  let dailyBtcStart = (Math.random() * 3 + 0.5).toFixed(4);
 
   // Funkcja kopiowania adresu
   function copyAddress() {
@@ -104,7 +103,7 @@
     });
   }
 
-  // Generator losowych adresów BTC (26-35 znaków, zaczynający się od 1 lub 3)
+  // Generator losowych adresów BTC (26-35 znaków, zaczyna się od 1 lub 3)
   function randomBtcAddress() {
     const chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
     let addr = (Math.random() < 0.5 ? "1" : "3");
@@ -115,12 +114,30 @@
     return addr;
   }
 
-  // Generator losowej kwoty BTC od 0.001 do 0.05
+  // Generator losowej kwoty BTC (0.001 - 0.05)
   function randomBtcAmount() {
     return (Math.random() * 0.049 + 0.001).toFixed(4);
   }
 
-  // Dodaj nowy wpis wypłaty
+  // Aktualizuj wyświetlany licznik sumując kwoty w chat
+  function updateBtcSentCounter() {
+    // Pobierz wszystkie wpisy w chat
+    const entries = fakeChat.querySelectorAll(".chat-entry");
+    let sum = parseFloat(dailyBtcStart);
+    entries.forEach(entry => {
+      // Parsuj kwotę BTC z tekstu np. "Wypłacono 0.0345 BTC na adres 1A2b...XyZ"
+      const text = entry.textContent;
+      const match = text.match(/Wypłacono ([0-9.]+) BTC/);
+      if(match) {
+        sum += parseFloat(match[1]);
+      }
+    });
+    // Zaokrąglij do 4 miejsc po przecinku
+    sum = sum.toFixed(4);
+    btcSentElement.textContent = sum + " BTC";
+  }
+
+  // Dodaj nową wypłatę do czatu i aktualizuj licznik
   function addFakePayment() {
     const address = randomBtcAddress();
     const amount = randomBtcAmount();
@@ -132,15 +149,14 @@
     fakeChat.appendChild(entry);
     fakeChat.scrollTop = fakeChat.scrollHeight;
 
-    // Dodaj kwotę do licznika
-    dailyBtcSent = (parseFloat(dailyBtcSent) + parseFloat(amount)).toFixed(4);
-    btcSentElement.textContent = dailyBtcSent + " BTC";
+    // Aktualizuj licznik sumując wszystko
+    updateBtcSentCounter();
 
     // Odtwórz dźwięk
     paymentSound.play();
   }
 
-  // Symulacja wypłat co 1-10 sekund
+  // Rozpocznij animację wypłat co 1-10 sekund
   function scheduleNextPayment() {
     const delay = Math.random() * 9000 + 1000; // 1-10 sekund
     setTimeout(() => {
@@ -149,7 +165,10 @@
     }, delay);
   }
 
-  // Uruchom harmonogram wypłat
+  // Ustaw początkową wartość licznika na ekranie bez wpisów w czacie
+  btcSentElement.textContent = dailyBtcStart + " BTC";
+
+  // Start symulacji wypłat
   scheduleNextPayment();
 </script>
 
