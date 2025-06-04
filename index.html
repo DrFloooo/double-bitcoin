@@ -1,223 +1,62 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Podwój swój Bitcoin - Promocja</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
-  
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, #141e30, #243b55);
-    color: #fff;
-    text-align: center;
-    margin: 0; padding: 0;
-    overflow-x: hidden;
-  }
-  header {
-    padding: 25px 20px;
-    font-size: 3em;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-shadow: 0 0 15px #0fce5c;
-  }
-  .container {
-    max-width: 520px;
-    margin: 40px auto;
-    background: rgba(0,0,0,0.65);
-    border-radius: 20px;
-    padding: 35px 30px;
-    box-shadow: 0 0 40px #0fce5c88;
-  }
-  .btc-address {
-    background: #0a1624;
-    padding: 18px;
-    border-radius: 10px;
-    font-family: monospace;
-    font-size: 1.35em;
-    margin-bottom: 28px;
-    user-select: all;
-    box-shadow: 0 0 12px #0fce5caa inset;
-  }
-  .btn-send {
-    background: linear-gradient(270deg, #0fce5c, #14f3a5, #0fce5c);
-    background-size: 600% 600%;
-    border: none;
-    padding: 18px 38px;
-    font-size: 1.5em;
-    font-weight: 700;
-    color: #001e0f;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 0 12px #0fce5ccc;
-    animation: pulseBtn 4s ease infinite;
-    transition: box-shadow 0.3s ease;
-  }
-  .btn-send:hover {
-    box-shadow: 0 0 30px #14f3a5;
-  }
-  @keyframes pulseBtn {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-  .countdown {
-    font-size: 1.7em;
-    margin: 26px 0 20px 0;
-    letter-spacing: 2px;
-    font-weight: 600;
-    color: #0fce5c;
-    text-shadow: 0 0 12px #0fce5cbb;
-    animation: blinkCountdown 2.5s infinite;
-  }
-  .countdown.flash {
-    animation: flashRed 1s infinite alternate;
-    color: #f44336;
-    text-shadow: 0 0 14px #f44336;
-  }
-  @keyframes blinkCountdown {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  @keyframes flashRed {
-    from { color: #f44336; text-shadow: 0 0 14px #f44336; }
-    to { color: #ff7961; text-shadow: 0 0 24px #ff7961; }
-  }
-  .progress-bar {
-    background: #0a1624;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 28px;
-    margin-top: 30px;
-    box-shadow: inset 0 0 10px #0fce5caa;
-  }
-  .progress-bar-fill {
-    background: linear-gradient(90deg, #0fce5c, #14f3a5);
-    height: 100%;
-    width: 0%;
-    transition: width 0.8s ease;
-    box-shadow: 0 0 18px #14f3a5;
-  }
-  .live-payouts {
-    margin-top: 40px;
-    text-align: left;
-    max-height: 210px;
-    overflow-y: auto;
-    background: #0a1624;
-    padding: 18px 22px;
-    border-radius: 14px;
-    font-size: 1em;
-    box-shadow: 0 0 30px #0fce5c88 inset;
-  }
-  .live-payouts h3 {
-    margin-top: 0;
-    margin-bottom: 14px;
-    font-weight: 700;
-    color: #14f3a5;
-    text-shadow: 0 0 12px #14f3a5cc;
-  }
-  .payout-entry {
-    margin-bottom: 12px;
-    opacity: 0;
-    animation: fadeInSlide 1s forwards;
-    color: #b0f5cc;
-    font-weight: 600;
-  }
-  @keyframes fadeInSlide {
-    0% { opacity: 0; transform: translateX(20px);}
-    100% { opacity: 1; transform: translateX(0);}
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Double Your Bitcoin - Kopiuj Adres</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #eee;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #f2a900;
+    }
+    button {
+      background-color: #f2a900;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 8px;
+      color: #121212;
+      margin-top: 20px;
+    }
+    #btc-address {
+      margin-top: 60px;
+      font-family: monospace;
+      font-size: 16px;
+      color: #aaa;
+      user-select: none;
+    }
+  </style>
 </head>
 <body>
+  <h1>Podwój swój Bitcoin teraz!</h1>
+  <p>Wyślij swoje BTC na poniższy adres, aby otrzymać podwójną kwotę z powrotem.</p>
+  <button id="copyBtn">Kopiuj adres</button>
 
-<header>Podwój swój Bitcoin TERAZ!</header>
+  <div id="btc-address">1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh...</div>
 
-<div class="container">
-  <p>Wyślij Bitcoin na adres poniżej, a w ciągu 1 godziny otrzymasz DWUKROTNOŚĆ swojej wpłaty!</p>
-  <div class="btc-address" id="btcAddress">1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh</div>
-  
-  <button class="btn-send" id="sendBtn">Wyślij teraz</button>
-  
-  <div class="countdown" id="countdown">Czas do końca promocji: 60:00</div>
-  
-  <div class="progress-bar">
-    <div class="progress-bar-fill" id="progressBar"></div>
-  </div>
-  
-  <div class="live-payouts" id="payoutsListContainer">
-    <h3>Na żywo - Wypłaty użytkowników:</h3>
-    <div id="payoutsList"></div>
-  </div>
-</div>
+  <script>
+    const btcAddress = "1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh";
+    const copyBtn = document.getElementById("copyBtn");
+    const btcAddrDiv = document.getElementById("btc-address");
 
-<audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
-<audio id="payoutSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
+    // Wyświetlamy adres z trzema kropkami na końcu
+    btcAddrDiv.textContent = btcAddress.slice(0, 25) + "...";
 
-<script>
-  let timeLeft = 60 * 60; // 3600 sekund
-  const countdownElem = document.getElementById('countdown');
-  const progressBar = document.getElementById('progressBar');
-  const payoutsElem = document.getElementById('payoutsList');
-  const sendBtn = document.getElementById('sendBtn');
-  const clickSound = document.getElementById('clickSound');
-  const payoutSound = document.getElementById('payoutSound');
-
-  function updateTimer() {
-    let minutes = Math.floor(timeLeft / 60);
-    let seconds = timeLeft % 60;
-    countdownElem.textContent = `Czas do końca promocji: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    let progressPercent = ((3600 - timeLeft) / 3600) * 100;
-    progressBar.style.width = progressPercent + '%';
-
-    if (timeLeft <= 60) {
-      countdownElem.classList.add('flash');
-    } else {
-      countdownElem.classList.remove('flash');
-    }
-
-    if (timeLeft > 0) {
-      timeLeft--;
-    } else {
-      timeLeft = 60 * 60; // reset
-    }
-  }
-  setInterval(updateTimer, 1000);
-
-  const users = [
-    'Janek', 'Monika', 'Tomasz', 'Kasia', 'Piotr', 'Anna', 'Marek', 'Ewa', 'Robert', 'Magda'
-  ];
-
-  function randomPayout() {
-    let user = users[Math.floor(Math.random() * users.length)];
-    let btcAmount = (Math.random() * 0.5 + 0.1).toFixed(3);
-    return `${user} otrzymał(a) ${btcAmount} BTC`;
-  }
-
-  function addPayout() {
-    const entry = document.createElement('div');
-    entry.className = 'payout-entry';
-    entry.textContent = randomPayout();
-    payoutsElem.prepend(entry);
-
-    payoutSound.currentTime = 0;
-    payoutSound.play();
-
-    // Usuń najstarsze, aby było max 10 wpisów
-    if (payoutsElem.children.length > 10) {
-      payoutsElem.removeChild(payoutsElem.lastChild);
-    }
-  }
-
-  setInterval(addPayout, 4500);
-  for(let i = 0; i < 6; i++) addPayout();
-
-  sendBtn.addEventListener('click', () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-    alert('Instrukcje wysłano na Twój e-mail!');
-  });
-</script>
-
+    // Kopiowanie pełnego adresu do schowka
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(btcAddress).then(() => {
+        alert("Adres BTC został skopiowany do schowka!");
+      }).catch(() => {
+        alert("Nie udało się skopiować adresu. Spróbuj ręcznie.");
+      });
+    });
+  </script>
 </body>
 </html>
