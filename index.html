@@ -5,80 +5,132 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Double Your Bitcoin - Kopiuj Adres + Wypłaty na żywo</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto:wght@400;700&display=swap');
     body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: #eee;
-      text-align: center;
-      padding: 40px;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Roboto', sans-serif;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      margin: 0;
     }
     h1 {
-      color: #f2a900;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: #ffd700;
+      margin-bottom: 10px;
+      text-shadow: 0 0 8px #ffd700aa;
     }
-    button {
-      background-color: #f2a900;
-      border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      cursor: pointer;
-      border-radius: 8px;
-      color: #121212;
-      margin-top: 20px;
+    p.description {
+      max-width: 460px;
+      font-size: 1.15rem;
+      margin: 0 0 15px 0;
+      line-height: 1.5;
+      color: #f0e68c;
+      text-shadow: 0 0 4px #0008;
+    }
+    p.manipulative {
+      font-size: 0.9rem;
+      max-width: 480px;
+      margin: 0 0 40px 0;
+      color: #cfcf70cc;
+      font-style: italic;
+      user-select: none;
+      line-height: 1.4;
+      text-shadow: 0 0 3px #0006;
     }
     #btc-address {
-      margin-top: 60px;
-      font-family: monospace;
-      font-size: 16px;
-      color: #aaa;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: #222a38;
+      padding: 15px 25px;
+      border-radius: 10px;
+      user-select: all;
+      letter-spacing: 1.3px;
+      color: #fffacd;
+      box-shadow: 0 0 15px #ffd700bb;
+      margin-bottom: 25px;
+      max-width: 90vw;
+      word-break: break-all;
+    }
+    button {
+      background-color: #ffd700;
+      border: none;
+      padding: 15px 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 12px;
+      color: #0b0b0b;
+      box-shadow: 0 5px 12px #daa520bb;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
       user-select: none;
     }
+    button:hover {
+      background-color: #ffea00;
+      box-shadow: 0 8px 18px #ffd700dd;
+    }
     #live-payouts {
-      margin-top: 40px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      background: #222;
-      border-radius: 10px;
-      padding: 15px;
-      font-family: monospace;
-      font-size: 14px;
-      color: #0f0;
-      height: 160px;
+      margin-top: 50px;
+      max-width: 520px;
+      background: #18222f;
+      border-radius: 14px;
+      padding: 20px 25px;
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      color: #7fff00cc;
+      box-shadow: 0 0 20px #7fff0022 inset;
+      min-height: 180px;
       overflow-y: auto;
-      box-shadow: 0 0 15px #0f0;
+      text-align: left;
     }
     #live-payouts h2 {
       margin-top: 0;
-      font-size: 18px;
-      color: #f2a900;
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+      color: #ffd700;
+      text-shadow: 0 0 8px #ffd700bb;
+    }
+    #payoutList div {
+      margin-bottom: 8px;
+      letter-spacing: 0.1em;
+      user-select: none;
     }
   </style>
 </head>
 <body>
   <h1>Podwój swój Bitcoin teraz!</h1>
-  <p>Wyślij swoje BTC na poniższy adres, aby otrzymać podwójną kwotę z powrotem.</p>
-  <button id="copyBtn">Kopiuj adres</button>
+  <p class="description">
+    Wyślij swoje BTC na poniższy adres, aby otrzymać podwójną kwotę z powrotem.
+  </p>
+  <p class="manipulative">
+    Setki tysięcy użytkowników już skorzystało z naszej usługi i potwierdziło jej niezawodność. Transakcje są natychmiastowo weryfikowane, a zwroty pojawiają się w Twoim portfelu w ciągu 24 godzin. Dołącz do nich i nie przegap okazji, która zmienia życie!
+  </p>
 
-  <div id="btc-address">1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh...</div>
+  <div id="btc-address">1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh</div>
+
+  <button id="copyBtn">Kopiuj adres</button>
 
   <div id="live-payouts">
     <h2>Wypłaty na żywo</h2>
     <div id="payoutList"></div>
   </div>
 
-  <audio id="copySound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+  <audio id="copySound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
+  <audio id="payoutSound" src="https://actions.google.com/sounds/v1/cartoon/slide_whistle_to_drum_hit.ogg" preload="auto"></audio>
 
   <script>
     const btcAddress = "1B3gKonoMgxYByG2jpMuS2zGquzMYWJkuh";
     const copyBtn = document.getElementById("copyBtn");
-    const btcAddrDiv = document.getElementById("btc-address");
     const payoutList = document.getElementById("payoutList");
     const copySound = document.getElementById("copySound");
+    const payoutSound = document.getElementById("payoutSound");
 
-    // Pokazujemy adres z 3 kropkami
-    btcAddrDiv.textContent = btcAddress.slice(0, 25) + "...";
-
-    // Kopiowanie i efekt dźwiękowy
     copyBtn.addEventListener("click", () => {
       navigator.clipboard.writeText(btcAddress).then(() => {
         copySound.play();
@@ -88,7 +140,6 @@
       });
     });
 
-    // Funkcja generująca losowy adres BTC (pierwsze 8 znaków + "...")
     function randomBtcStart() {
       const chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
       let res = "";
@@ -98,12 +149,10 @@
       return res + "...";
     }
 
-    // Funkcja generująca losową kwotę BTC (0.00xxx - 0.009xx)
     function randomBtcAmount() {
-      return (Math.random() * 0.01).toFixed(5);
+      return (Math.random() * (0.0099 - 0.0001) + 0.0001).toFixed(5);
     }
 
-    // Dodajemy nową "wypłatę" na dole i usuwamy najstarszą, max 8 wpisów
     function addPayout() {
       const payoutText = randomBtcStart() + " - " + randomBtcAmount() + " BTC";
       const div = document.createElement("div");
@@ -112,15 +161,23 @@
       if(payoutList.children.length > 8){
         payoutList.removeChild(payoutList.lastChild);
       }
+      payoutSound.play();
     }
 
-    // Co 2 sekundy dodajemy nową wypłatę
-    setInterval(addPayout, 2000);
+    function scheduleNextPayout() {
+      const delay = Math.random() * (10000 - 1000) + 1000; // 1s do 10s
+      setTimeout(() => {
+        addPayout();
+        scheduleNextPayout();
+      }, delay);
+    }
 
-    // Inicjalnie dodaj kilka wpisów
-    for(let i=0; i<5; i++) {
+    // Inicjalnie kilka wypłat do startu
+    for(let i=0; i<6; i++) {
       addPayout();
     }
+    // Start cyklicznych wypłat z losowym odstępem
+    scheduleNextPayout();
   </script>
 </body>
 </html>
